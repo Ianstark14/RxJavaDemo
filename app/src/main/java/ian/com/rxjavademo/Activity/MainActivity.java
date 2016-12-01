@@ -8,18 +8,14 @@ import android.support.v4.app.FragmentTransaction;
 import ian.com.rxjavademo.Fragment.NewsFragment;
 import ian.com.rxjavademo.R;
 import ian.com.rxjavademo.Utils.IActivity;
-import ian.com.rxjavademo.Utils.IFragment;
 
 public class MainActivity extends IActivity {
-    private IFragment mFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        NewsFragment newsFragment = new NewsFragment();
-        mFragment = newsFragment;
-        changeView(newsFragment);
+        changeView(new NewsFragment());
     }
 
     public void changeView(Fragment f) {
