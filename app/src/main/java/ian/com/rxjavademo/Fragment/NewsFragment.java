@@ -51,11 +51,11 @@ public class NewsFragment extends IFragment implements INewsView {
         mSwipeRefreshLayout.setProgressBackgroundColorSchemeResource(R.color.normal_green);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.bg_normal);
         mPresenter = new NewsPresenterImpl(this);
-        mPresenter.getNews("tiyu");
+        mPresenter.getNews("top");
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mPresenter.getNews("tiyu");
+                mPresenter.getNews("top");
             }
         });
         mIv_more.setOnClickListener(new View.OnClickListener() {

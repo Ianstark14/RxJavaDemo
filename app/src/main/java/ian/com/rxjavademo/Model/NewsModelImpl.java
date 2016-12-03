@@ -9,7 +9,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 
 public class NewsModelImpl implements INewsModel {
@@ -17,11 +21,52 @@ public class NewsModelImpl implements INewsModel {
     private String KEY = "c661a7afff3498b35d6661cf1941ea3b";
 
     @Override
-    public void loadNews(String type, final OnLoadedListener listener) {
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
+    public void loadNewsByRxJava(String type, final OnLoadedListener listener) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
         HeadlineNetService netService = retrofit.create(HeadlineNetService.class);
-        Call<RespondBean> call = netService.getHeadline(type, KEY);
-        call.enqueue(new Callback<RespondBean>() {
+        netService.getHeadlinebyRx(type, KEY)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<RespondBean>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        listener.onFailure("Failure to get new list");
+                    }
+
+                    @Override
+                    public void onNext(RespondBean respondBean) {
+                        if (respondBean != null && respondBean.getResult() != null) {
+                            List<NewsBean> list = respondBean.getResult().getData();
+                            if (list != null && list.size() != 0) {
+                                listener.onSuccess(list);
+                            } else {
+                                listener.onFailure("Failure to get new list");
+                            }
+                        } else {
+                            listener.onFailure("Failure to get new list");
+                        }
+                    }
+                });
+
+    }
+
+    @Override
+    public void loadNews(String type, final OnLoadedListener listener) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        HeadlineNetService netService = retrofit.create(HeadlineNetService.class);
+        netService.getHeadline(type, KEY).enqueue(new Callback<RespondBean>() {
             @Override
             public void onResponse(Call<RespondBean> call, Response<RespondBean> response) {
                 if (response.body() != null && response.body().getResult() != null) {
@@ -41,7 +86,6 @@ public class NewsModelImpl implements INewsModel {
                 listener.onFailure("Failure to get new list");
             }
         });
-
     }
 
     public interface OnLoadedListener {
@@ -49,4 +93,5 @@ public class NewsModelImpl implements INewsModel {
 
         void onFailure(String errorMsg);
     }
+
 }

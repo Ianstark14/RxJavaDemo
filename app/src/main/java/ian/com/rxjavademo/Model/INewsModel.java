@@ -2,5 +2,6 @@ package ian.com.rxjavademo.Model;
 
 
 public interface INewsModel {
-    void loadNews(String type,NewsModelImpl.OnLoadedListener listener);
+    void loadNewsByRxJava(String type, NewsModelImpl.OnLoadedListener listener);
+    void loadNews(String type, NewsModelImpl.OnLoadedListener listener);
 }

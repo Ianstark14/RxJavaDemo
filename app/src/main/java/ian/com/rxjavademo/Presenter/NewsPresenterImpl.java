@@ -20,7 +20,7 @@ public class NewsPresenterImpl implements INewsPresenter, NewsModelImpl.OnLoaded
     @Override
     public void getNews(String type) {
         mNewsFragment.showProcess("正在加载", false);
-        mNewsModelImpl.loadNews(type, this);
+        mNewsModelImpl.loadNewsByRxJava(type, this);
     }
 
     @Override
