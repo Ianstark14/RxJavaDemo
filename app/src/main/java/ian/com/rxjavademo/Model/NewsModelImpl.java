@@ -23,12 +23,12 @@ public class NewsModelImpl implements INewsModel {
     @Override
     public void loadNewsByRxJava(String type, final OnLoadedListener listener) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(HeadlineNetService.BASE_URL)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         HeadlineNetService netService = retrofit.create(HeadlineNetService.class);
-        netService.getHeadlinebyRx(type, KEY)
+        netService.getHeadlinebyRx(type, HeadlineNetService.KEY)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<RespondBean>() {
@@ -62,11 +62,11 @@ public class NewsModelImpl implements INewsModel {
     @Override
     public void loadNews(String type, final OnLoadedListener listener) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(HeadlineNetService.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         HeadlineNetService netService = retrofit.create(HeadlineNetService.class);
-        netService.getHeadline(type, KEY).enqueue(new Callback<RespondBean>() {
+        netService.getHeadline(type, HeadlineNetService.KEY).enqueue(new Callback<RespondBean>() {
             @Override
             public void onResponse(Call<RespondBean> call, Response<RespondBean> response) {
                 if (response.body() != null && response.body().getResult() != null) {

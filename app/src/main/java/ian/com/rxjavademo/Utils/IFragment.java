@@ -1,7 +1,6 @@
 package ian.com.rxjavademo.Utils;
 
 import android.os.Bundle;
-import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -24,10 +23,6 @@ public abstract class IFragment extends Fragment implements IToast {
         mRootView.setClickable(true);
         bindViews();
         return mRootView;
-    }
-
-    public final View findViewById(@IdRes int id) {
-        return mRootView.findViewById(id);
     }
 
     @Override

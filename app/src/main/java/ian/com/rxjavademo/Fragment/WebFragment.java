@@ -1,7 +1,11 @@
 package ian.com.rxjavademo.Fragment;
 
+import android.graphics.Bitmap;
+import android.net.http.SslError;
 import android.os.Bundle;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import butterknife.BindView;
 import ian.com.rxjavademo.R;
@@ -26,10 +30,23 @@ public class WebFragment extends IFragment {
     @Override
     public void bindViews() {
         mWebView.loadUrl(mUrl);
-        mWebView.setFindListener(new WebView.FindListener() {
+        mWebView.setWebViewClient(new WebViewClient() {
             @Override
-            public void onFindResultReceived(int activeMatchOrdinal, int numberOfMatches, boolean isDoneCounting) {
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+                showProcess("正在跳转", false);
+            }
 
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                closeProcess();
+            }
+
+            @Override
+            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+                super.onReceivedSslError(view, handler, error);
+                toast(error.toString());
             }
         });
     }

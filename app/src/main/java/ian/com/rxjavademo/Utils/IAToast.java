@@ -11,11 +11,6 @@ import android.widget.Toast;
 import ian.com.rxjavademo.R;
 
 
-/**
- * @author justin on 2016/04/26 14:09
- *         justin@magicare.me
- * @version V1.0
- */
 public class IAToast extends BaseContextObject {
 
     private final Toast sToast;
@@ -42,7 +37,7 @@ public class IAToast extends BaseContextObject {
     public void show(String msg, PromptState state) {
         int icon = 0;
         if (state != null) {
-            switch (state){
+            switch (state) {
                 case SUCCESS:
                     icon = R.drawable.ic_toast_success;
                     break;
@@ -54,9 +49,9 @@ public class IAToast extends BaseContextObject {
                     break;
             }
         }
-        if(icon == 0) {
+        if (icon == 0) {
             ivIcon.setVisibility(View.GONE);
-        }else {
+        } else {
             ivIcon.setVisibility(View.VISIBLE);
             ivIcon.setImageResource(icon);
         }
