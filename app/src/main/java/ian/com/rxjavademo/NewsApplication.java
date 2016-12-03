@@ -12,6 +12,8 @@ public class NewsApplication extends Application {
     private static final String TAG_TECHNOLOGY = "keji";
     private static final String TAG_FINANCE = "caijing";
     private static final String TAG_FASHION = "shishang";
+    private static final String TAG_TOP = "top";
+
 
     @Override
     public void onCreate() {
@@ -26,11 +28,11 @@ public class NewsApplication extends Application {
         return TAG_SOCIETY;
     }
 
-    public static String getTagInternation() {
+    public static String getTagInternational() {
         return TAG_INTERNATION;
     }
 
-    public static String getTagEntartainment() {
+    public static String getTagEntertainment() {
         return TAG_ENTARTAINMENT;
     }
 
@@ -48,5 +50,9 @@ public class NewsApplication extends Application {
 
     public static String getTagFashion() {
         return TAG_FASHION;
+    }
+
+    public static String getTagTop() {
+        return TAG_TOP;
     }
 }

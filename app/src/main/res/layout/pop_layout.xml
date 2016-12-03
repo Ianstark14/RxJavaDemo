@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btn_top"
+        android:layout_width="40dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center"
+        android:background="@drawable/item_selector"
+        android:text="头条" />
+
+    <Button
+        android:id="@+id/btn_sport"
+        android:layout_width="40dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center"
+        android:background="@drawable/item_selector"
+        android:text="体育" />
+
+    <Button
+        android:id="@+id/btn_society"
+        android:layout_width="40dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center"
+        android:background="@drawable/item_selector"
+        android:text="社会" />
+
+    <Button
+        android:id="@+id/btn_international"
+        android:layout_width="40dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center"
+        android:background="@drawable/item_selector"
+        android:text="国际" />
+
+    <Button
+        android:id="@+id/btn_entertainment"
+        android:layout_width="40dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center"
+        android:background="@drawable/item_selector"
+        android:text="娱乐" />
+
+    <Button
+        android:id="@+id/btn_military"
+        android:layout_width="40dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center"
+        android:background="@drawable/item_selector"
+        android:text="军事" />
+
+    <Button
+        android:id="@+id/btn_finance"
+        android:layout_width="40dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center"
+        android:background="@drawable/item_selector"
+        android:text="财经" />
+
+    <Button
+        android:id="@+id/btn_fashion"
+        android:layout_width="40dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center"
+        android:background="@drawable/item_selector"
+        android:text="时尚" />
+
+
+</LinearLayout>

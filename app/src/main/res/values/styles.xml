@@ -13,4 +13,9 @@
         <item name="android:windowTranslucentNavigation">true</item>
         <item name="android:statusBarColor">@color/normal_green</item>
     </style>
+
+    <style name="pop_animation">
+        <item name="android:windowEnterAnimation">@anim/pop_in</item>
+        <item name="android:windowExitAnimation">@anim/pop_out</item>
+    </style>
 </resources>

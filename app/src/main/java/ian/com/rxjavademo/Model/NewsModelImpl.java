@@ -5,7 +5,6 @@ import java.util.List;
 import ian.com.rxjavademo.Bean.NewsBean;
 import ian.com.rxjavademo.Bean.RespondBean;
 import ian.com.rxjavademo.NetInterface.HeadlineNetService;
-import ian.com.rxjavademo.Utils.LogUtil;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
