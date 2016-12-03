@@ -14,10 +14,10 @@ import butterknife.BindView;
 import ian.com.rxjavademo.Activity.MainActivity;
 import ian.com.rxjavademo.Adapter.NewsAdapter;
 import ian.com.rxjavademo.Bean.NewsBean;
+import ian.com.rxjavademo.NewsApplication;
 import ian.com.rxjavademo.Presenter.NewsPresenterImpl;
 import ian.com.rxjavademo.R;
 import ian.com.rxjavademo.Utils.IFragment;
-import ian.com.rxjavademo.Utils.LogUtil;
 import ian.com.rxjavademo.View.INewsView;
 import ian.com.rxjavademo.View.MorePop;
 
@@ -33,6 +33,7 @@ public class NewsFragment extends IFragment implements INewsView {
     private MorePop mPop;
     private NewsAdapter mAdapter;
     private NewsPresenterImpl mPresenter;
+    private String mTag = NewsApplication.getTagTop();
 
     @Override
     public int getLayout() {
@@ -46,25 +47,33 @@ public class NewsFragment extends IFragment implements INewsView {
 
     @Override
     public void bindViews() {
-        mPop = new MorePop(getActivity().getBaseContext());
+        mPop = new MorePop(getActivity());
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         mSwipeRefreshLayout.setProgressBackgroundColorSchemeResource(R.color.normal_green);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.bg_normal);
         mPresenter = new NewsPresenterImpl(this);
-        mPresenter.getNews("top");
+        mPresenter.getNews(mTag);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mPresenter.getNews("top");
+                mPresenter.getNews(mTag);
             }
         });
         mIv_more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LogUtil.d("more");
-                mPop.showAsDropDown(mRl_title);
+                mPop.setOnPopClickListener(new MorePop.onPopItemClickListener() {
+                    @Override
+                    public void onItemClick(String tag) {
+                        mPresenter.getNews(tag);
+                        mTag = tag;
+                        mPop.dismiss();
+                    }
+                });
+                mPop.showPopupWindow(mIv_more);
             }
         });
+
     }
 
     @Override
