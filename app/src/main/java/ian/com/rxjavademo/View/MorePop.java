@@ -40,7 +40,7 @@ public class MorePop extends PopupWindow {
 
     public void showPopupWindow(View parent) {
         if (!this.isShowing()) {
-            this.showAsDropDown(parent, parent.getLayoutParams().width / 2, 24);
+            this.showAsDropDown(parent, parent.getLayoutParams().width / 2, 27);
         } else {
             this.dismiss();
         }
